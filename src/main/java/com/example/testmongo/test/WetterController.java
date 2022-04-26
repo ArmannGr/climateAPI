@@ -16,7 +16,6 @@ public class WetterController {
     @PostMapping("/wetter")
     public void save(@RequestBody Wetter wetter){
         wetterRepository.save(wetter);
-
     }
 
 }
