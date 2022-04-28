@@ -1,10 +1,9 @@
-package com.example.testmongo.test;
+package com.example.testmongo.model;
 
 import lombok.Data;
 
 @Data
 public class Wetter {
-    long Id;
     double temperature;
     String city;
 }
