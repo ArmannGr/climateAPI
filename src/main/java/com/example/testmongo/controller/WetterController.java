@@ -1,6 +1,7 @@
 package com.example.testmongo.controller;
 
 import com.example.testmongo.model.Wetter;
+import com.example.testmongo.model.WetterString;
 import com.example.testmongo.service.WetterService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +16,9 @@ public class WetterController {
         this.wetterService = wetterService;
     }
 
-    @PostMapping("/wetter")
-    public Wetter save(@RequestBody Wetter wetter){
-        return this.wetterService.getWetter(wetter);
+    @PostMapping("/setWetter")
+    public Wetter save(@RequestBody WetterString wetterString){
+        return this.wetterService.getWetter(wetterString);
     }
 
 }

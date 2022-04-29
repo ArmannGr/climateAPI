@@ -1,11 +1,10 @@
 package com.example.testmongo.model;
-
 import lombok.Data;
 
 @Data
-public class Wetter {
-    long _id;
-    double temperature;
+public class WetterString {
+    String _id;
+    String temperature;
     String city;
     String time;
 }
