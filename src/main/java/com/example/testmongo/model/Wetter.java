@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class Wetter {
-    long _id;
     double temperature;
-    String city;
+    String country;
     String time;
 }
