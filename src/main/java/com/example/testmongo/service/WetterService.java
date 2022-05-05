@@ -32,51 +32,59 @@ public class WetterService {
     return wetter;
   }
 
-    public void readWetterFile(String filename){
-      System.out.println(LocalDateTime.now());
-      String folder = "/Users/mauritz_langer/Downloads";
-      File file = new File(folder + "/" + filename);
-
-      if (!file.canRead() || !file.isFile())
-        System.exit(0);
-
-      BufferedReader in = null;
-      try {
-        in = new BufferedReader(new FileReader(file));
-        String zeile = null;
-        in.readLine();
-        int i = 0;
-        List<Wetter> wetterList = new ArrayList<>();
-        String[] filenameWithoutEnding;
-        if (filename.contains("_")) {
-          filenameWithoutEnding = filename.split("_");
-        } else {
-          filenameWithoutEnding = filename.split("\\.");
-        }
-        while ((zeile = in.readLine()) != null) {
-          i++;
-          String[] splitLine = zeile.split(",");
-          Wetter wetter = new Wetter();
-          wetter.setCountry(filenameWithoutEnding[0]);
-          wetter.setTime(splitLine[0]);
-          //System.out.println(splitLine[1]);
-          wetter.setTemperature(Double.parseDouble(splitLine[1]));
-          wetterList.add(wetter);
-          if (i == 10000){
-            addWetterList(wetterList);
-            wetterList.clear();
-            i = 0;
-          }
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      } finally {
-        System.out.println(LocalDateTime.now());
-        if (in != null)
-          try {
-            in.close();
-          } catch (IOException e) {
-          }
+  public void readFolder(String foldername){
+    File folder = new File(foldername);
+    for (File file: folder.listFiles()){
+      if (!file.isDirectory()) {
+        readWetterFile(foldername, file.getName());
       }
     }
+  }
+
+  public void readWetterFile(String folder, String filename){
+    System.out.println(LocalDateTime.now());
+    File file = new File(folder + "/" + filename);
+
+    if (!file.canRead() || !file.isFile())
+      System.exit(0);
+
+    BufferedReader in = null;
+    try {
+      in = new BufferedReader(new FileReader(file));
+      String zeile = null;
+      in.readLine();
+      int i = 0;
+      List<Wetter> wetterList = new ArrayList<>();
+      String[] filenameWithoutEnding;
+      if (filename.contains("_")) {
+        filenameWithoutEnding = filename.split("_");
+      } else {
+        filenameWithoutEnding = filename.split("\\.");
+      }
+      while ((zeile = in.readLine()) != null) {
+        i++;
+        String[] splitLine = zeile.split(",");
+        Wetter wetter = new Wetter();
+        wetter.setCountry(filenameWithoutEnding[0]);
+        wetter.setTime(splitLine[0]);
+        //System.out.println(splitLine[1]);
+        wetter.setTemperature(Double.parseDouble(splitLine[1]));
+        wetterList.add(wetter);
+        if (i == 10000){
+          addWetterList(wetterList);
+          wetterList.clear();
+          i = 0;
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      System.out.println(LocalDateTime.now());
+      if (in != null)
+        try {
+          in.close();
+        } catch (IOException e) {
+        }
+    }
+  }
 }
