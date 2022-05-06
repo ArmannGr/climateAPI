@@ -49,12 +49,12 @@ public class WetterService {
       System.exit(0);
 
     BufferedReader in = null;
+    List<Wetter> wetterList = new ArrayList<>();
     try {
       in = new BufferedReader(new FileReader(file));
       String zeile = null;
       in.readLine();
       int i = 0;
-      List<Wetter> wetterList = new ArrayList<>();
       String[] filenameWithoutEnding;
       if (filename.contains("_")) {
         filenameWithoutEnding = filename.split("_");
@@ -79,6 +79,10 @@ public class WetterService {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
+      if (!wetterList.isEmpty()){
+        addWetterList(wetterList);
+        wetterList.clear();
+      }
       System.out.println(LocalDateTime.now());
       if (in != null)
         try {
