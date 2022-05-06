@@ -4,6 +4,7 @@ import com.example.testmongo.model.Wetter;
 import com.example.testmongo.service.CountryEmissionGrowthService;
 import com.example.testmongo.service.PopulationService;
 import com.example.testmongo.service.WetterService;
+import com.example.testmongo.service.WorldEmissionUsageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,16 @@ public class WetterController {
     private final WetterService wetterService;
     private final PopulationService populationService;
     private final CountryEmissionGrowthService countryEmissionGrowthService;
+    private final WorldEmissionUsageService worldEmissionUsageService;
 
-    public WetterController(WetterService wetterService, PopulationService populationService, CountryEmissionGrowthService countryEmissionGrowthService) {
+
+    public WetterController(WetterService wetterService, PopulationService populationService,
+                            CountryEmissionGrowthService countryEmissionGrowthService,
+                            WorldEmissionUsageService worldEmissionUsageService) {
         this.wetterService = wetterService;
         this.populationService = populationService;
         this.countryEmissionGrowthService = countryEmissionGrowthService;
+        this.worldEmissionUsageService = worldEmissionUsageService;
     }
 
     @PostMapping("/setWetter")
@@ -43,6 +49,12 @@ public class WetterController {
     @GetMapping("/countryEmissionGrowth/importToDB")
     public String countryEmissionGrowthImportToDB(){
         this.countryEmissionGrowthService.readCountryEmissionGrowthFile("ANNUAL_CO2_CHANGE_PERCENT_FINAL.CSV");
+        return "Success";
+    }
+
+    @GetMapping("/worldEmissionUsageRepository/importToDB")
+    public String worldEmissionUsageRepositoryImportToDB(){
+        this.worldEmissionUsageService.readWorldEmissionUsageFile("ANNUAL_CO2_LAND_INDUSTRY_FINAL.CSV");
         return "Success";
     }
 
