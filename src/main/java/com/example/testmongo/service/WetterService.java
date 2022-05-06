@@ -35,13 +35,14 @@ public class WetterService {
   public void readFolder(String foldername){
     File folder = new File(foldername);
     for (File file: folder.listFiles()){
-      if (!file.isDirectory()) {
+      if (!file.isDirectory() && file.getName().endsWith(".csv")) {
         readWetterFile(foldername, file.getName());
       }
     }
   }
 
   public void readWetterFile(String folder, String filename){
+      System.out.println(filename);
     System.out.println(LocalDateTime.now());
     File file = new File(folder + "/" + filename);
 
