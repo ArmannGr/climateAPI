@@ -62,18 +62,22 @@ public class WetterService {
         filenameWithoutEnding = filename.split("\\.");
       }
       while ((zeile = in.readLine()) != null) {
-        i++;
-        String[] splitLine = zeile.split(",");
-        Wetter wetter = new Wetter();
-        wetter.setCountry(filenameWithoutEnding[0]);
-        wetter.setTime(splitLine[0]);
-        //System.out.println(splitLine[1]);
-        wetter.setTemperature(Double.parseDouble(splitLine[1]));
-        wetterList.add(wetter);
-        if (i == 10000){
-          addWetterList(wetterList);
-          wetterList.clear();
-          i = 0;
+        try {
+          i++;
+          String[] splitLine = zeile.split(",");
+          Wetter wetter = new Wetter();
+          wetter.setCountry(filenameWithoutEnding[0]);
+          wetter.setTime(splitLine[0]);
+          //System.out.println(splitLine[1]);
+          wetter.setTemperature(Double.parseDouble(splitLine[1]));
+          wetterList.add(wetter);
+          if (i == 10000){
+            addWetterList(wetterList);
+            wetterList.clear();
+            i = 0;
+          }
+        } catch (Exception e){
+          System.out.println("Fehler");
         }
       }
     } catch (IOException e) {
