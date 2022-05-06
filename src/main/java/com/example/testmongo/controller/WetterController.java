@@ -23,7 +23,8 @@ public class WetterController {
 
   @GetMapping("/importToDB")
   public String importToDB(){
-    this.wetterService.readWetterFile("Albania.csv");
+    String folder = "/Users/mauritz_langer/Documents/Test";
+    this.wetterService.readFolder(folder);
     return "Success";
   }
 
