@@ -23,7 +23,7 @@ public class WetterService {
     }
 
     public List<Wetter> addWetterList(List<Wetter> wetterList){
-        wetterRepository.insert(wetterList);
+        wetterRepository.saveAll(wetterList);
         return wetterList;
     }
 

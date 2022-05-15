@@ -12,5 +12,19 @@
         <property name="serverSelectionTimeoutMS" value="100000" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="langerm.ddnss.de" uuid="81511d0f-dc39-4ea2-b6a9-024c3371e74b">
+      <driver-ref>mongo</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb://langerm.ddnss.de:27017/wetter</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="climaApi" uuid="66d63678-849e-420f-83ae-0e57d2e45a30">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://langerm.ddnss.de:8636/climaApi</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
